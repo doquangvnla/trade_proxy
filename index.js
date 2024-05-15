@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 
 // Route để xử lý yêu cầu proxy
 app.get('/proxy/*', (req, res) => {
-  const url = req.url.replace('/proxy/', '');
+  const url = req.url.replace('/proxy/', 'https://pixels-server.pixels.xyz/v1/marketplace/item/itm_wood?pid=6625e78954c3ca9674476554&v=');
   console.log(`Proxying request to: ${url}`); // Log URL để gỡ lỗi
   request({ url, headers: { 'User-Agent': 'request' } })
     .on('response', (response) => {
