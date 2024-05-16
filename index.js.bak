@@ -11,12 +11,11 @@ app.use((req, res, next) => {
 });
 
 // Route để xử lý yêu cầu proxy
-app.get('/*', (req, res) => {
-  // Tạo URL từ yêu cầu ban đầu
-  const url = 'https://' + req.url.substring(1); // Bỏ dấu '/' đầu tiên
-
+app.get('', (req, res) => {
+  let url;
+  url = 'https://' + req.url;
+  
   console.log(`Proxying request to: ${url}`); // Log URL để gỡ lỗi
-
   request({ url, headers: { 'User-Agent': 'request' } })
     .on('response', (response) => {
       console.log(`Response status code: ${response.statusCode}`); // Log trạng thái phản hồi
@@ -27,6 +26,8 @@ app.get('/*', (req, res) => {
     })
     .pipe(res);
 });
+
+
 
 // Lắng nghe trên cổng do Vercel cung cấp
 const port = process.env.PORT || 3000;
